@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Aegis - Enterprise Cyber Defense Platform</title>
+    <style>
+        :root {
+            --quantum-blue: #00d4ff;
+            --quantum-purple: #8b5cf6;
+            --quantum-cyan: #06b6d4;
+            --dark-900: #0c0a1a;
+            --dark-800: #1a1625;
+            --dark-700: #2d2438;
+            --threat-critical: #ef4444;
+            --threat-warning: #f59e0b;
+            --threat-safe: #10b981;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: var(--dark-900);
+            color: #e5e7eb;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Navigation */
+        .nav {
+            background: rgba(26, 22, 37, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--quantum-blue), var(--quantum-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #e5e7eb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--quantum-blue);
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, var(--quantum-blue), var(--quantum-purple));
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 8rem 0 4rem;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--quantum-blue), var(--quantum-purple), var(--quantum-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: #9ca3af;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Dashboard */
+        .dashboard {
+            padding: 4rem 0;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .metric-card {
+            background: rgba(26, 22, 37, 0.8);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--quantum-blue);
+        }
+        
+        .metric-label {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--quantum-blue);
+        }
+        
+        .metric-change {
+            font-size: 0.8rem;
+            color: var(--threat-safe);
+        }
+        
+        /* Threats Section */
+        .threats-section {
+            background: rgba(26, 22, 37, 0.8);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--quantum-blue);
+        }
+        
+        .threat-item {
+            background: rgba(45, 36, 56, 0.6);
+            border-left: 4px solid var(--threat-critical);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 6px;
+        }
+        
+        .threat-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .threat-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.8rem;
+            color: #9ca3af;
+        }
+        
+        .status-badge {
+            background: var(--threat-critical);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        
+        /* Pricing */
+        .pricing {
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .pricing h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--quantum-blue), var(--quantum-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .pricing-card {
+            background: rgba(26, 22, 37, 0.8);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--quantum-blue);
+        }
+        
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--quantum-blue);
+        }
+        
+        .plan-price {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        
+        .plan-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .plan-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        }
+        
+        .select-plan {
+            background: linear-gradient(135deg, var(--quantum-blue), var(--quantum-purple));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.3s;
+        }
+        
+        .select-plan:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .pulse { animation: pulse 2s infinite; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .metrics-grid { grid-template-columns: 1fr; }
+            .pricing-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">⚡ Quantum Aegis</div>
+                <ul class="nav-links">
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#threats">Threats</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                </ul>
+                <a href="#pricing" class="cta-button">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Enterprise Cyber Defense Platform</h1>
+            <p>Advanced AI-powered threat detection with quantum encryption and real-time security monitoring for enterprise-grade protection.</p>
+            <a href="#pricing" class="cta-button">Start Free Trial</a>
+        </div>
+    </section>
+
+    <!-- Dashboard -->
+    <section id="dashboard" class="dashboard">
+        <div class="container">
+            <h2 class="section-title">Real-Time Security Metrics</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Threats Blocked</div>
+                    <div class="metric-value" id="threats-blocked">2,847</div>
+                    <div class="metric-change">↑ 12% today</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Mean Time to Detect</div>
+                    <div class="metric-value" id="mttd">1.2s</div>
+                    <div class="metric-change">↓ 0.3s improved</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">AI Confidence</div>
+                    <div class="metric-value" id="ai-confidence">97.8%</div>
+                    <div class="metric-change">↑ 2.1% accuracy</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Quantum Keys</div>
+                    <div class="metric-value" id="quantum-keys">48</div>
+                    <div class="metric-change pulse">🔄 Rotating</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Threats -->
+    <section id="threats" class="dashboard">
+        <div class="container">
+            <div class="threats-section">
+                <h2 class="section-title">Active Threat Intelligence</h2>
+                <div id="threats-list">
+                    <!-- Threats will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2>Choose Your Protection Level</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="plan-name">Lite</div>
+                    <div class="plan-price">$49<span style="font-size: 1rem; color: #9ca3af;">/month</span></div>
+                    <ul class="plan-features">
+                        <li>✓ Basic threat detection</li>
+                        <li>✓ Email protection</li>
+                        <li>✓ 24/7 monitoring</li>
+                        <li>✓ Monthly reports</li>
+                    </ul>
+                    <button class="select-plan" onclick="selectPlan('lite')">Select Lite</button>
+                </div>
+                <div class="pricing-card">
+                    <div class="plan-name">Pro</div>
+                    <div class="plan-price">$149<span style="font-size: 1rem; color: #9ca3af;">/month</span></div>
+                    <ul class="plan-features">
+                        <li>✓ Advanced AI detection</li>
+                        <li>✓ Quantum encryption</li>
+                        <li>✓ Custom policies</li>
+                        <li>✓ API access</li>
+                        <li>✓ Priority support</li>
+                    </ul>
+                    <button class="select-plan" onclick="selectPlan('pro')">Select Pro</button>
+                </div>
+                <div class="pricing-card">
+                    <div class="plan-name">Enterprise</div>
+                    <div class="plan-price">$399<span style="font-size: 1rem; color: #9ca3af;">/month</span></div>
+                    <ul class="plan-features">
+                        <li>✓ Full platform access</li>
+                        <li>✓ Dedicated support</li>
+                        <li>✓ Custom integration</li>
+                        <li>✓ Compliance reporting</li>
+                        <li>✓ White-label options</li>
+                    </ul>
+                    <button class="select-plan" onclick="selectPlan('enterprise')">Select Enterprise</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // API Base URL
+        const API_BASE = '/api';
+        
+        // Update metrics every 5 seconds
+        async function updateMetrics() {
+            try {
+                const response = await fetch(`${API_BASE}/demo/metrics`);
+                const data = await response.json();
+                
+                document.getElementById('threats-blocked').textContent = data.threatsBlocked?.toLocaleString() || '2,847';
+                document.getElementById('mttd').textContent = `${data.mttd || '1.2'}s`;
+                document.getElementById('ai-confidence').textContent = `${data.aiConfidence || '97.8'}%`;
+                document.getElementById('quantum-keys').textContent = data.quantumKeys || '48';
+            } catch (error) {
+                console.log('Demo mode - using static data');
+            }
+        }
+        
+        // Update threats list
+        async function updateThreats() {
+            try {
+                const response = await fetch(`${API_BASE}/demo/threats`);
+                const threats = await response.json();
+                
+                const threatsList = document.getElementById('threats-list');
+                threatsList.innerHTML = threats.map(threat => `
+                    <div class="threat-item">
+                        <div class="threat-title">${threat.title}</div>
+                        <div class="threat-meta">
+                            <span>Source: ${threat.source}</span>
+                            <span>Type: ${threat.type}</span>
+                            <span class="status-badge">${threat.status}</span>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                document.getElementById('threats-list').innerHTML = `
+                    <div class="threat-item">
+                        <div class="threat-title">Advanced Malware Detection</div>
+                        <div class="threat-meta">
+                            <span>Source: Email Gateway</span>
+                            <span>Type: malware</span>
+                            <span class="status-badge">BLOCKED</span>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+        
+        // Plan selection
+        function selectPlan(plan) {
+            alert(`Redirecting to ${plan} subscription checkout...`);
+            // In production, this would redirect to Stripe checkout
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateMetrics();
+            updateThreats();
+            
+            // Update every 5 seconds
+            setInterval(updateMetrics, 5000);
+            setInterval(updateThreats, 10000);
+        });
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
