@@ -341,6 +341,57 @@
         </div>
     </section>
 
+    <!-- Global Threat Map -->
+    <section id="threat-map" class="dashboard">
+        <div class="container">
+            <div class="map-section">
+                <h2 class="section-title">🌍 Global Threat Map - Live Cyber Attacks</h2>
+                <div class="map-container">
+                    <div id="world-map">
+                        <svg viewBox="0 0 1000 500" class="world-svg">
+                            <!-- World Map SVG will be populated by JavaScript -->
+                        </svg>
+                        <div class="threat-indicators" id="threat-indicators">
+                            <!-- Threat markers will be added here -->
+                        </div>
+                    </div>
+                    <div class="map-legend">
+                        <div class="legend-item">
+                            <div class="legend-color critical"></div>
+                            <span>Critical Threats</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color high"></div>
+                            <span>High Risk</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color medium"></div>
+                            <span>Medium Risk</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color blocked"></div>
+                            <span>Blocked</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="threat-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="countries-affected">47</div>
+                        <div class="stat-label">Countries Affected</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="active-campaigns">12</div>
+                        <div class="stat-label">Active Campaigns</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="threats-per-minute">23</div>
+                        <div class="stat-label">Threats/Minute</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Threats -->
     <section id="threats" class="dashboard">
         <div class="container">
